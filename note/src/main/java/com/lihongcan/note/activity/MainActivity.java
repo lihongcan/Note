@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initView() {
         fab.setOnClickListener(fabListener);
         noteList.setLayoutManager(new LinearLayoutManager(this));
-        noteList.addItemDecoration(new RecycleViewDivider(this,LinearLayoutManager.HORIZONTAL));
+//        noteList.addItemDecoration(new RecycleViewDivider(this,LinearLayoutManager.HORIZONTAL));
         adapter = new NoteListAdapter();
         noteList.setAdapter(adapter);
 
