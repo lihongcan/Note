@@ -1,15 +1,14 @@
 package com.lihongcan.note.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.lihongcan.note.R;
@@ -51,10 +49,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     Toolbar toolbar;
     @ViewInject(R.id.fab)
     FloatingActionButton fab;
-    Handler handler;
-    Looper looper;
-    Message message;
-    System system;
     /**
      * 底部导航
      */
@@ -101,19 +95,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     View.OnClickListener fabListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+//            startActivity(intent);
+            showAlertDialog();
         }
     };
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog d=builder.setTitle("test").setMessage("message").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).create();
+        d.show();
+    }
+
     private void initBottomBar() {
         //设置模式
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE);
-        //数字标识
-        BadgeItem item=new BadgeItem()
-                .setBackgroundColorResource(R.color.blue)
-                .setText("5")
-                .setHideOnSelect(false);
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_location_on_white_24dp, "位置").setActiveColorResource(R.color.orange))
                 .addItem(new BottomNavigationItem(R.drawable.ic_find_replace_white_24dp, "发现").setActiveColorResource(R.color.blue))
